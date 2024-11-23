@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Registration</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #FFD700; /* Gold */
+            text-shadow: 2px 2px 5px #333; /* Dark shadow */
+        }
+
+        form {
+            background-color: rgba(28, 28, 28, 0.8); /* Semi-transparent dark background */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            width: 400px; /* Fixed width for form */
+        }
+
+        table {
+            width: 100%; /* Full width for table */
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%; /* Full width for inputs */
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #222; /* Dark input background */
+            color: #FFFFFF; /* White text */
+            font-size: 1em;
+        }
+
+        input[type="submit"],
+        button {
+            background-color: #FFD700; /* Gold */
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #FFA500; /* Orange */
+        }
+
+        #successMessage {
+            display: none;
+            color: #00FF00; /* Bright green */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Donor Registration</h1>
+        <form id="signupForm" onsubmit="return validateForm(event)" method="POST">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" placeholder="Enter Your Name" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" placeholder="Enter your mail id" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" placeholder="Enter your password" required></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="confirm_password" placeholder="Confirm your password" required></td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td><input type="text" name="location" placeholder="Enter your location" required></td>
+                </tr>
+                <tr>
+                    <td>Mobile Number</td>
+                    <td><input type="number" name="mobile_number" placeholder="Enter your mobile number" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Sign Up">
+            <button type="button" onclick="window.location.href='donor_signin.html'">Sign In</button>
+        </form>
+
+        <div id="successMessage">
+            Signed up successfully!
+        </div>
+    </center>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            var password = document.forms["signupForm"]["password"].value;
+            var confirm_password = document.forms["signupForm"]["confirm_password"].value;
+            var mobile_number = document.forms["signupForm"]["mobile_number"].value;
+
+            if (password !== confirm_password) {
+                alert("Passwords do not match!");
+                return false;
+            }
+
+            var mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile_number)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return false;
+            }
+
+            // If validation passes, show success message
+            document.getElementById("successMessage").style.display = "block";
+
+            // Optionally, you can send the data to the server via AJAX (fetch or XMLHttpRequest)
+            // Here is a simple example using fetch (uncomment below to use it)
+
+            /*
+            const formData = new FormData(document.getElementById("signupForm"));
+            fetch('/donor_signup', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById("successMessage").style.display = "block";
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            */
+
+            return true; // Prevent the form from submitting if you want to handle it with JavaScript
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Sign In</title>
+    <style>
+        body {
+            background-color: #121212; /* Dark background */
+            color: white; /* White text color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #1e1e1e; /* Darker background for the form */
+            padding: 40px;  /* Increased padding for more space */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 400px;  /* Increased width */
+            text-align: center;
+        }
+        h1 {
+            color: #FFD700; /* Gold color for the heading */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px #333;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        td {
+            padding: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;  /* Increased padding for inputs */
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background-color: #FFD700; /* Gold button */
+            color: #000000;
+            border: none;
+            padding: 12px;
+            font-size: 1.2em;  /* Slightly larger font size */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #FFA500; /* Darker gold on hover */
+        }
+        #message {
+            color: #FF6347;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Organization Sign In</h1>
+        <form onsubmit="return orgSignIn(event);">
+            <table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="org_email" placeholder="Enter your mail id" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="org_password" placeholder="Enter your password" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Sign In" onclick="window.location.href='org_dashboard.html'">
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        async function orgSignIn(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("org_email").value;
+            const password = document.getElementById("org_password").value;
+            const messageElement = document.getElementById("message");
+
+            try {
+                const response = await fetch('/org_signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageElement.textContent = result.message;
+                    // Optionally, redirect to organization dashboard
+                    window.location.href = 'org_dashboard.html'; 
+                } else {
+                    messageElement.textContent = result.message;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageElement.textContent = 'An error occurred during sign-in. Please try again.';
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>

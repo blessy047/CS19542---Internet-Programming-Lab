@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.2em;
+            color: #FFD700; /* Gold */
+            text-shadow: 2px 2px 5px #333; /* Dark shadow */
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #FFA500; /* Orange */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px #222; /* Dark shadow */
+        }
+
+        p {
+            font-size: 1.2em;
+            width: 80%;
+            line-height: 1.6;
+            margin: 20px auto;
+            text-align: justify;
+            padding: 20px;
+            background-color: #1C1C1C;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            background-color: #FFD700; /* Gold */
+            border: none;
+            color: black;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 10px rgba(255, 255, 0, 0.6);
+        }
+
+        button:hover {
+            background-color: #FFA500; /* Orange */
+            box-shadow: 2px 2px 15px rgba(255, 165, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 50px auto;
+            padding: 20px;
+            width: 90%;
+            background-color: #111;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .donate-card {
+            background-color: #1C1C1C;
+            color: #FFFFFF;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 40%;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .donate-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #111;
+            color: #666;
+            text-align: center;
+            font-size: 0.8em;
+        }
+
+        footer a {
+            color: #FFD700; /* Gold */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Donation Options</h1>
+        <h2>"Together, We Can Make a Difference"</h2>
+    </center>
+
+    <div class="container">
+        <!-- Donate Food Section -->
+        <div class="donate-card">
+            <h2>Donate Food</h2>
+            <p>
+                Food donation serves a dual purpose by reducing food wastage and providing essential sustenance 
+                to individuals and families facing economic challenges. Foster a sense of community by donating.
+            </p>
+            <button onclick="window.location.href='donate_food.html'">Donate</button>
+        </div>
+
+        <!-- Donate Grocery Section -->
+        <div class="donate-card">
+            <h2>Donate Grocery</h2>
+            <p>
+                Support individuals and families facing financial hardship by providing necessary resources to meet their needs.
+                Grocery donations can make a significant difference in community initiatives.
+            </p>
+            <button onclick="window.location.href='donate_grocery.html'">Donate</button>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 ShareCare | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </footer>
+</body>
+</html>

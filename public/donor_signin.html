@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #FFD700;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #1E1E1E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            margin: 15px 0;
+            color: #FFFFFF;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background-color: #333;
+            color: #FFFFFF;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #FFD700;
+            color: #000000;
+            border: none;
+            padding: 12px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #FFA500;
+        }
+
+        #message {
+            color: #FF6347;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <center>
+        <h1>Sign In</h1>
+        <form onsubmit="return signUp(event);">
+            <table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="email" placeholder="Enter your mail id" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" placeholder="Enter your password" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Sign In"onclick="window.location.href='donate.html'">
+        </form>
+        <div id="message"></div>
+    </center>
+
+    <script>
+        async function signUp(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const messageElement = document.getElementById("message");
+
+            try {
+                const response = await fetch('/donor_signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageElement.textContent = result.message;
+                } else {
+                    messageElement.textContent = result.message;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageElement.textContent = 'An error occurred during sign-up. Please try again.';
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>

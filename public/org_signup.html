@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Registration</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #FFD700; /* Gold */
+            text-shadow: 2px 2px 5px #333;
+        }
+
+        form {
+            background-color: rgba(28, 28, 28, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            width: 400px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #222;
+            color: #FFFFFF;
+            font-size: 1em;
+        }
+
+        input[type="submit"],
+        button {
+            background-color: #FFD700;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #FFA500;
+        }
+
+        #successMessage {
+            display: none;
+            color: #00FF00;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Organization Registration</h1>
+        <form id="orgSignupForm" onsubmit="return validateOrgForm(event)" method="POST">
+            <table>
+                <tr>
+                    <td>Organization Name</td>
+                    <td><input type="text" name="name" placeholder="Enter Organization Name" required></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" placeholder="Enter email" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" placeholder="Enter password" required></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="confirm_password" placeholder="Confirm password" required></td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td><input type="text" name="location" placeholder="Enter location" required></td>
+                </tr>
+                <tr>
+                    <td>Contact Number</td>
+                    <td><input type="number" name="mobile_number" placeholder="Enter contact number" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Sign Up">
+            <button type="button" onclick="window.location.href='org_signin.html'">Sign In</button>
+        </form>
+
+        <div id="successMessage">
+            Organization registered successfully!
+        </div>
+    </center>
+
+    <script>
+        function validateOrgForm(event) {
+            event.preventDefault();
+
+            var password = document.forms["orgSignupForm"]["password"].value;
+            var confirm_password = document.forms["orgSignupForm"]["confirm_password"].value;
+            var mobile_number = document.forms["orgSignupForm"]["mobile_number"].value;
+
+            if (password !== confirm_password) {
+                alert("Passwords do not match!");
+                return false;
+            }
+
+            var mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile_number)) {
+                alert("Please enter a valid 10-digit contact number.");
+                return false;
+            }
+
+            document.getElementById("successMessage").style.display = "block";
+
+            return true;
+        }
+    </script>
+</body>
+</html>
